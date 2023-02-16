@@ -48,8 +48,6 @@ def webServer(port=13331):
             # Send the content of the requested file to the client
             for i in f:  # for line in file
             # Fill in start - send your html file contents #Fill in end
-                connectionSocket.sendall(LengthString) #send message length
-                connectionSocket.sendall(‘Content-Type: text/html\n’) #type of message
                 connectionSocket.sendall(outputdata[i].encode())
                 connectionSocket.sendall("\r\n".encode())
                 connectionSocket.close()  # closing the connection socket
