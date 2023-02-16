@@ -21,14 +21,13 @@ def webServer(port=13331):
         connectionSocket, addr =  serverSocket.accept()
 
         try:
-            message = connectionSocket.recv(1024).decode('utf-8')
+            message = connectionSocket.recv(1024).decode()
 
             filename = message.split()[1]
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
             f = open(filename[1:],'rt')
-            outputdata= f.decode("utf-8")
                      # fill in end
 
             outputdata=b"Content-Type: text/html; charset=UTF-8\r\n"
