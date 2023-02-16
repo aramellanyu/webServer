@@ -33,7 +33,7 @@ def webServer(port=13331):
 
             outputdata=b"Content-Type: text/html; charset=UTF-8\r\n"
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
-              outputdata=f.decode('UTF-8')
+              outputdata.decode()
             # Content-Type above is an example on how to send a header as bytes
             # Fill in end
 
