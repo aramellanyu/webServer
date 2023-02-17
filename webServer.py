@@ -48,18 +48,18 @@ def webServer(port=13331):
             # Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok?
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
-            connectionSocket.send('\nHTTP/1.1 200 OK\r\r\n\n'.encode())
+            connectionSocket.send('\nHTTP/1.1 200 OK\r\n\r\n'.encode())
             # Fill in end
 
             # Send the content of the requested file to the client
             for i in f:  # for line in file
                 # Fill in start - send your html file contents #Fill in end
                 connectionSocket.sendall(line[i].encode())
-                connectionSocket.send("\r\n\r\n".encode())
+                connectionSocket.send('\r\n\r\n')
                 connectionSocket.close()  # closing the connection socket
 
         except Exception as e:
-            connectionSocket.send("\nHTTP/1.1 404 Not Found\n\n".encode())
+            connectionSocket.send("\nHTTP/1.1 404 Not Foundr\n\r\n".encode())
             connectionSocket.close()
 
 # Send response message for invalid request due to the file not being found (404)
