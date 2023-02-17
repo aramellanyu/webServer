@@ -1,3 +1,4 @@
+
 # import socket module
 from socket import *
 # In order to terminate the program
@@ -12,6 +13,7 @@ def webServer(port=13331):
 
     # Fill in start
     serverSocket.listen(1)
+    print ("server is listening")
     # Fill in end
 
     while True:
@@ -24,18 +26,21 @@ def webServer(port=13331):
             message = connectionSocket.recv(1024)
 
             filename = message.split()[1]
-        
+
+
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-            f = open(filename[1:],'rt')
+            f = open(filename[1:] ,'rt')
             line = f.readlines()
-            
+            print(line)
+
+
             # fill in end
 
-            outputdata=b"Content-Type: text/html; charset=UTF-8\r\n"
+            outputdata =b"Content-Type: text/html; charset=UTF-8\r\n"
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
-        
+
             # Content-Type above is an example on how to send a header as bytes
             #connectionSocket.sendall(outputdata)
             # Fill in end
@@ -48,28 +53,28 @@ def webServer(port=13331):
 
             # Send the content of the requested file to the client
             for i in f:  # for line in file
-            # Fill in start - send your html file contents #Fill in end
+                # Fill in start - send your html file contents #Fill in end
                 connectionSocket.sendall(line[i].encode())
                 connectionSocket.sendall("\r\n".encode())
                 connectionSocket.close()  # closing the connection socket
 
         except Exception as e:
-                connectionSocket.send("\nHTTP/1.1 404 Not Found\n\n".encode())
-                connectionSocket.close()
+            connectionSocket.send("\nHTTP/1.1 404 Not Found\n\n".encode())
+            connectionSocket.close()
 
 # Send response message for invalid request due to the file not being found (404)
-    # Fill in start
+# Fill in start
 
-    # Fill in end
+# Fill in end
 
-    # Close client socket
-    # Fill in start
+# Close client socket
+# Fill in start
 
-    # Fill in end
+# Fill in end
 
-    # Commenting out the below, as its technically not required and some students have moved it erroneously in the While loop. DO NOT DO THAT OR YOURE GONNA HAVE A BAD TIME.
-    # serverSocket.close()
-    # sys.exit()  # Terminate the program after sending the corresponding data
+# Commenting out the below, as its technically not required and some students have moved it erroneously in the While loop. DO NOT DO THAT OR YOURE GONNA HAVE A BAD TIME.
+# serverSocket.close()
+# sys.exit()  # Terminate the program after sending the corresponding data
 
 
 if __name__ == "__main__":
