@@ -23,7 +23,7 @@ def webServer(port=13331):
         connectionSocket, addr = serverSocket.accept()
 
         try:
-            message = connectionSocket.recv(1024).decode()
+            message = connectionSocket.recv(1024)
 
             filename = message.split()[1]
 
