@@ -23,7 +23,7 @@ def webServer(port=13331):
         connectionSocket, addr = serverSocket.accept()
 
         try:
-            message = connectionSocket.recv(1024).decode('utf-8')
+            message = connectionSocket.recv(1024).decode()
 
             filename = message.split()[1]
 
@@ -32,7 +32,7 @@ def webServer(port=13331):
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
             f = open(filename[1:],'r')
-            line = f.readlines()
+            #i = f.readlines()
             #print(line)
 
 
@@ -54,9 +54,9 @@ def webServer(port=13331):
             # Send the content of the requested file to the client
             for i in f:  # for line in file
                 # Fill in start - send your html file contents #Fill in end
-                connectionSocket.sendall(line[i].encode('utf-8'))
-            connectionSocket.send('\r\n\r\n'.encode())
-            connectionSocket.close()
+                connectionSocket.sendall(i.encode())
+                connectionSocket.sendall('\r\n\r\n'.encode())
+            #connectionSocket.close()
 
         except Exception as e:
             connectionSocket.send("\nHTTP/1.1 404 Not Found\r\n\r\n".encode())
