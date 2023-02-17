@@ -13,7 +13,7 @@ def webServer(port=13331):
 
     # Fill in start
     serverSocket.listen(1)
-    print ("server is listening")
+    #print ("server is listening")
     # Fill in end
 
     while True:
@@ -48,14 +48,14 @@ def webServer(port=13331):
             # Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok?
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
-            connectionSocket.send('\nHTTP/1.1 200 OK\r\r\n\n'.encode())
+            connectionSocket.send('\nHTTP/1.1 200 OK\r\n\r\n'.encode())
             # Fill in end
 
             # Send the content of the requested file to the client
             for i in f:  # for line in file
                 # Fill in start - send your html file contents #Fill in end
                 connectionSocket.sendall(line[i].encode())
-                connectionSocket.sendall("\r\n\r\n")
+                #connectionSocket.sendall('\r\n\r\n')
             connectionSocket.close()
 
         except Exception as e:
