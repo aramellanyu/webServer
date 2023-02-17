@@ -13,7 +13,7 @@ def webServer(port=13331):
 
     # Fill in start
     serverSocket.listen(1)
- 
+    print ("server is listening")
     # Fill in end
 
     while True:
@@ -23,7 +23,7 @@ def webServer(port=13331):
         connectionSocket, addr = serverSocket.accept()
 
         try:
-            message = connectionSocket.recv(1024).decode()
+            message = connectionSocket.recv(1024)
 
             filename = message.split()[1]
 
@@ -31,8 +31,10 @@ def webServer(port=13331):
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-            f = open(filename[1:] ,'r')
+            f = open(filename[1:],'r')
             line = f.readlines()
+            print(line)
+
 
             # fill in end
 
@@ -40,25 +42,25 @@ def webServer(port=13331):
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
 
             # Content-Type above is an example on how to send a header as bytes
-        
+            #connectionSocket.sendall(outputdata)
             # Fill in end
 
             # Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok?
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
-            connectionSocket.send('\HTTP/1.1 200 OK\r\n\r\n'.encode())
+            connectionSocket.send('\nHTTP/1.1 200 OK\r\r\n\n'.encode())
             # Fill in end
 
             # Send the content of the requested file to the client
             for i in f:  # for line in file
                 # Fill in start - send your html file contents #Fill in end
                 connectionSocket.sendall(line[i].encode())
-                connectionSocket.send('\r\n\r\n').encode())
-                connectionSocket.close() 
+                connectionSocket.sendall("\r\n\r\n")
+            connectionSocket.close()
 
         except Exception as e:
-            connectionSocket.send("\HTTP/1.1 404 Not Found\r\n\r\n".encode())
-            connectionSocket.close()
+            connectionSocket.send("\nHTTP/1.1 404 Not Found\n\n".encode())
+        connectionSocket.close()
 
 # Send response message for invalid request due to the file not being found (404)
 # Fill in start
@@ -72,7 +74,6 @@ def webServer(port=13331):
 
 # Commenting out the below, as its technically not required and some students have moved it erroneously in the While loop. DO NOT DO THAT OR YOURE GONNA HAVE A BAD TIME.
 # serverSocket.close()
-
 #sys.exit()  # Terminate the program after sending the corresponding data
 
 
