@@ -55,7 +55,6 @@ def webServer(port=13331):
             for i in f:  # for line in file
                 # Fill in start - send your html file contents #Fill in end
                 connectionSocket.sendall(line[i].encode())
-                connectionSocket.send('\r\n\r\n')
                 connectionSocket.close() 
 
         except Exception as e:
@@ -74,7 +73,8 @@ def webServer(port=13331):
 
 # Commenting out the below, as its technically not required and some students have moved it erroneously in the While loop. DO NOT DO THAT OR YOURE GONNA HAVE A BAD TIME.
 # serverSocket.close()
-# sys.exit()  # Terminate the program after sending the corresponding data
+
+sys.exit()  # Terminate the program after sending the corresponding data
 
 
 if __name__ == "__main__":
