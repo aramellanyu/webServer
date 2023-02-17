@@ -13,7 +13,7 @@ def webServer(port=13331):
 
     # Fill in start
     serverSocket.listen(1)
-    print ("server is listening")
+    #print ("server is listening")
     # Fill in end
 
     while True:
@@ -33,7 +33,7 @@ def webServer(port=13331):
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
             f = open(filename[1:],'r')
             line = f.readlines()
-            print(line)
+            #print(line)
 
 
             # fill in end
